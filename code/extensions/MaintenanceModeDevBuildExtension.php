@@ -17,8 +17,8 @@ class MaintenanceModeDevBuildExtension extends DataExtension
     {
         $tableList = DB::table_list();
         // Check if the database-table already exists
-        $this->config = SiteConfig::current_site_config();
         if (array_key_exists('siteconfig', $tableList)) {
+            $this->config = SiteConfig::current_site_config();
             $this->config->MaintenanceMode = true;
             $this->config->write();
         }
@@ -26,9 +26,10 @@ class MaintenanceModeDevBuildExtension extends DataExtension
 
     public function onAfterInit()
     {
-        // We don't need to check here. We've been through build. This might only fail if extension isn't recognised
-        $this->config->MaintenanceMode = false;
-        $this->config->write();
+        if($this->config) {
+            $this->config->MaintenanceMode = false;
+            $this->config->write();
+        }
     }
 
 }

@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Created by IntelliJ IDEA.
- * User: Sphere
- * Date: 25-10-2015
- * Time: 19:34
+ * Before we start a database-build, set the maintenancemode, so in case of an error or a long build
+ * visitors will get the maintenancemode page.
+ *
+ * class MaintenanceModeDevBuildExtension
  */
 class MaintenanceModeDevBuildExtension extends DataExtension
 {
@@ -15,13 +15,18 @@ class MaintenanceModeDevBuildExtension extends DataExtension
 
     public function onBeforeInit()
     {
+        $tableList = DB::table_list();
+        // Check if the database-table already exists
         $this->config = SiteConfig::current_site_config();
-        $this->config->MaintenanceMode = true;
-        $this->config->write();
+        if (array_key_exists('siteconfig', $tableList)) {
+            $this->config->MaintenanceMode = true;
+            $this->config->write();
+        }
     }
 
     public function onAfterInit()
     {
+        // We don't need to check here. We've been through build. This might only fail if extension isn't recognised
         $this->config->MaintenanceMode = false;
         $this->config->write();
     }

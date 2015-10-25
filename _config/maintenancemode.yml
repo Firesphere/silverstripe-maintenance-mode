@@ -7,11 +7,14 @@ After:
 # YAML configuration for SilverStripe
 # See http://doc.silverstripe.org/framework/en/topics/configuration
 # Caution: Indentation through two spaces, not tabs
+DevBuildController:
+  extensions:
+    - MaintenanceModeDevBuildExtension
 
 SiteConfig:
   extensions:
-    - MaintenanceMode_SiteConfigExtension
+    - MaintenanceModeSiteConfigExtension
 
 Page_Controller:
   extensions:
-    - MaintenanceMode_Page_ControllerExtension
+    - MaintenanceModePageControllerExtension

@@ -7,6 +7,12 @@
  * @author Darren-Lee Joseph <darrenleejoseph@gmail.com>
  * @package maintenancemode
  */
+
+/**
+ * StartGeneratedWithDataObjectAnnotator
+ * @property string RenderingTemplate
+ * EndGeneratedWithDataObjectAnnotator
+ */
 class UtilityPage extends ErrorPage {
 
 	private static $singular_name = 'Utility Page';
